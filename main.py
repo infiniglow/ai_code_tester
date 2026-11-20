@@ -1,3 +1,4 @@
+from pathlib import Path
 from agent.generator import generate_tests
 
 task_description = """
@@ -5,14 +6,16 @@ task_description = """
 Если b равен нулю, функция должна выбрасывать исключение ZeroDivisionError.
 """
 
-source_code = """
-def divide(a, b):
-    return a / b
-"""
+workspace = Path("workspace")
+source_code = (workspace / "source.py").read_text(encoding="utf-8")
 
 try:
     tests = generate_tests(task_description, source_code)
-    print("Сгенерированные тесты:", tests, sep="\n")
+
+    test_file = workspace / "test_generated.py"
+    test_file.write_text(tests, encoding="utf-8")
+
+    print("Тесты успешно сохранены!")
 
 except RuntimeError as error:
     print("Не удалось сгенерировать тесты:", error)

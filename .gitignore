@@ -10,3 +10,6 @@ __pycache__/
 
 # Файл с API-ключём
 .env
+
+# Сгенерированные тесты
+workspace/test_generated.py

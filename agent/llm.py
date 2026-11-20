@@ -1,11 +1,11 @@
-import os
+from os import getenv
 from dotenv import load_dotenv
 from openai import OpenAI, APIError
 
 load_dotenv()
 
-YANDEX_FOLDER_ID = os.getenv("YC_FOLDER_ID")
-YANDEX_API_KEY = os.getenv("YC_API_KEY")
+YANDEX_FOLDER_ID = getenv("YC_FOLDER_ID")
+YANDEX_API_KEY = getenv("YC_API_KEY")
 
 if not YANDEX_FOLDER_ID:
     raise RuntimeError("YC_FOLDER_ID не найден!")
