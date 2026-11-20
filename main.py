@@ -1,15 +1,6 @@
-import dotenv
-import os
+from agent.llm import send_request
 
-dotenv.load_dotenv()
+prompt = "Привет! Представься и расскажи, что ты умеешь."
+answer = send_request(prompt)
 
-folder_id = os.getenv("YC_FOLDER_ID")
-api_key = os.getenv("YC_API_KEY")
-
-if not folder_id:
-    raise RuntimeError("YC_FOLDER_ID не найден!")
-
-if not api_key:
-    raise RuntimeError("YC_API_KEY не найден!")
-
-print("Настройки Yandex Cloud успешно загружены!")
+print("Ответ языковой модели:", answer, sep="\n")
