@@ -1,6 +1,6 @@
 import os
 from dotenv import load_dotenv
-from openai import OpenAI
+from openai import OpenAI, APIError
 
 load_dotenv()
 
@@ -23,9 +23,15 @@ MODEL = f"gpt://{YANDEX_FOLDER_ID}/yandexgpt-lite/latest"
 
 
 def send_request(prompt):
-    response = client.responses.create(
-        model=MODEL,
-        input=prompt
-    )
+    try:
+        response = client.responses.create(
+            model=MODEL,
+            input=prompt
+        )
 
-    return response.output_text
+        return response.output_text
+
+    except APIError as error:
+        raise RuntimeError(
+            "Ошибка при обращении к Yandex AI API"
+        ) from error
